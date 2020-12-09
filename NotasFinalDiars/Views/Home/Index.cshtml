@@ -1,0 +1,57 @@
+﻿
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+
+<br />
+
+<div class="d-flex align-items-stretch">
+
+    <div>
+        @foreach (var i in ViewBag.Etiquetas)
+        {
+            <a href="/NotaEtiqueta/Index?idEtiqueta=@i.idEtiqueta" class="active">@i.nombreetiqueta</a>
+        }
+
+
+    </div>
+
+    <br />
+
+    <div class="container" style="padding: 2%">
+        @foreach (var item in ViewBag.Notas)
+        {
+            <div class="container" style="border-style: solid; border-radius: 3em; padding:5%">
+                Titulo: <h2>@item.tituloNota</h2>
+                <br />
+
+                @if (item.contenidoNota.Length >= 5)
+                {
+                    <p>Contenido:</p> <h2>@item.contenidoNota.Substring(0, 5)</h2>
+                }
+                else
+                {
+                    <p>Contenido:</p> <h2>@item.contenidoNota</h2>
+                }
+
+                <br />
+                Fecha de modificacion: <h2>@item.fechaModicacion.ToShortDateString()</h2>
+
+
+                <a href="/Notas/Editar?id=@item.idNota" class="btn btn-primary">Editar</a>
+
+                <a href="/Notas/Borrar?id=@item.idNota" class="btn btn-danger">Eliminar</a>
+                <a href="/NotaEtiqueta/Crear?id=@item.idNota" class="btn btn-primary">Agregar Etiqueta</a>
+
+                <a href="/Home/Index" class="btn btn-primary">Listar</a>
+
+            </div>
+            <br />
+            <br />
+        }
+    </div>
+
+    
+</div>
